@@ -1,3 +1,9 @@
+import animals.Animal;
+import animals.herbivores.*;
+import animals.predators.*;
+import config.SimulationParams;
+import plants.Plant;
+
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -103,29 +109,29 @@ public class Main {
 
     private boolean canAnimalReproduce(Animal animal, Map<String, Integer> cellCount, Map<String, Integer> totalCount) {
         switch (animal.getName()) {
-            case "Wolf": return cellCount.getOrDefault("Wolf", 0) < animal.maxPerCell && totalCount.getOrDefault("Wolf", 0) < SimulationParams.MAX_WOLVES;
-            case "Rabbit": return cellCount.getOrDefault("Rabbit", 0) < animal.maxPerCell && totalCount.getOrDefault("Rabbit", 0) < SimulationParams.MAX_RABBITS;
-            case "Duck": return cellCount.getOrDefault("Duck", 0) < animal.maxPerCell && totalCount.getOrDefault("Duck", 0) < SimulationParams.MAX_DUCKS;
-            case "Caterpillar": return cellCount.getOrDefault("Caterpillar", 0) < animal.maxPerCell && totalCount.getOrDefault("Caterpillar", 0) < SimulationParams.MAX_CATERPILLARS;
-            case "Boa": return cellCount.getOrDefault("Boa", 0) < animal.maxPerCell && totalCount.getOrDefault("Boa", 0) < SimulationParams.MAX_BOAS;
-            case "Fox": return cellCount.getOrDefault("Fox", 0) < animal.maxPerCell && totalCount.getOrDefault("Fox", 0) < SimulationParams.MAX_FOXES;
-            case "Bear": return cellCount.getOrDefault("Bear", 0) < animal.maxPerCell && totalCount.getOrDefault("Bear", 0) < SimulationParams.MAX_BEARS;
-            case "Eagle": return cellCount.getOrDefault("Eagle", 0) < animal.maxPerCell && totalCount.getOrDefault("Eagle", 0) < SimulationParams.MAX_EAGLES;
-            case "Horse": return cellCount.getOrDefault("Horse", 0) < animal.maxPerCell && totalCount.getOrDefault("Horse", 0) < SimulationParams.MAX_HORSES;
-            case "Deer": return cellCount.getOrDefault("Deer", 0) < animal.maxPerCell && totalCount.getOrDefault("Deer", 0) < SimulationParams.MAX_DEERS;
-            case "Mouse": return cellCount.getOrDefault("Mouse", 0) < animal.maxPerCell && totalCount.getOrDefault("Mouse", 0) < SimulationParams.MAX_MICE;
-            case "Goat": return cellCount.getOrDefault("Goat", 0) < animal.maxPerCell && totalCount.getOrDefault("Goat", 0) < SimulationParams.MAX_GOATS;
-            case "Sheep": return cellCount.getOrDefault("Sheep", 0) < animal.maxPerCell && totalCount.getOrDefault("Sheep", 0) < SimulationParams.MAX_SHEEP;
-            case "Boar": return cellCount.getOrDefault("Boar", 0) < animal.maxPerCell && totalCount.getOrDefault("Boar", 0) < SimulationParams.MAX_BOARS;
-            case "Buffalo": return cellCount.getOrDefault("Buffalo", 0) < animal.maxPerCell && totalCount.getOrDefault("Buffalo", 0) < SimulationParams.MAX_BUFFALOS;
+            case "animals.predators.Wolf": return cellCount.getOrDefault("animals.predators.Wolf", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.predators.Wolf", 0) < SimulationParams.MAX_WOLVES;
+            case "animals.herbivores.Rabbit": return cellCount.getOrDefault("animals.herbivores.Rabbit", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.herbivores.Rabbit", 0) < SimulationParams.MAX_RABBITS;
+            case "animals.herbivores.Duck": return cellCount.getOrDefault("animals.herbivores.Duck", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.herbivores.Duck", 0) < SimulationParams.MAX_DUCKS;
+            case "animals.herbivores.Caterpillar": return cellCount.getOrDefault("animals.herbivores.Caterpillar", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.herbivores.Caterpillar", 0) < SimulationParams.MAX_CATERPILLARS;
+            case "animals.predators.Boa": return cellCount.getOrDefault("animals.predators.Boa", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.predators.Boa", 0) < SimulationParams.MAX_BOAS;
+            case "animals.predators.Fox": return cellCount.getOrDefault("animals.predators.Fox", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.predators.Fox", 0) < SimulationParams.MAX_FOXES;
+            case "animals.predators.Bear": return cellCount.getOrDefault("animals.predators.Bear", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.predators.Bear", 0) < SimulationParams.MAX_BEARS;
+            case "animals.predators.Eagle": return cellCount.getOrDefault("animals.predators.Eagle", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.predators.Eagle", 0) < SimulationParams.MAX_EAGLES;
+            case "animals.herbivores.Horse": return cellCount.getOrDefault("animals.herbivores.Horse", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.herbivores.Horse", 0) < SimulationParams.MAX_HORSES;
+            case "animals.herbivores.Deer": return cellCount.getOrDefault("animals.herbivores.Deer", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.herbivores.Deer", 0) < SimulationParams.MAX_DEERS;
+            case "animals.herbivores.Mouse": return cellCount.getOrDefault("animals.herbivores.Mouse", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.herbivores.Mouse", 0) < SimulationParams.MAX_MICE;
+            case "animals.herbivores.Goat": return cellCount.getOrDefault("animals.herbivores.Goat", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.herbivores.Goat", 0) < SimulationParams.MAX_GOATS;
+            case "animals.herbivores.Sheep": return cellCount.getOrDefault("animals.herbivores.Sheep", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.herbivores.Sheep", 0) < SimulationParams.MAX_SHEEP;
+            case "animals.herbivores.Boar": return cellCount.getOrDefault("animals.herbivores.Boar", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.herbivores.Boar", 0) < SimulationParams.MAX_BOARS;
+            case "animals.herbivores.Buffalo": return cellCount.getOrDefault("animals.herbivores.Buffalo", 0) < animal.maxPerCell && totalCount.getOrDefault("animals.herbivores.Buffalo", 0) < SimulationParams.MAX_BUFFALOS;
             default: return false;  // На случай неизвестного вида
         }
     }
 
     private int getReproduceChance(Animal animal) {
-        return animal.getName().equals("Wolf") || animal.getName().equals("Boa") ||
-                animal.getName().equals("Fox") || animal.getName().equals("Bear") ||
-                animal.getName().equals("Eagle") ? 10 : 15;
+        return animal.getName().equals("animals.predators.Wolf") || animal.getName().equals("animals.predators.Boa") ||
+                animal.getName().equals("animals.predators.Fox") || animal.getName().equals("animals.predators.Bear") ||
+                animal.getName().equals("animals.predators.Eagle") ? 10 : 15;
     }
 
     private void waitForTasksCompletion(List<Future<?>> futures) {
@@ -147,7 +153,7 @@ public class Main {
     private void printStats() {
         Map<String, Integer> animalCount = new HashMap<>();
         synchronized (animals) {
-            animals.forEach(a -> animalCount.merge(a.name, 1, Integer::sum));
+            animals.forEach(a -> animalCount.merge(a.getName(), 1, Integer::sum));
             if (animalCount.size() == 0) running = false;
         }
         System.out.println("Tick: Plants: " + plants.size() + ", Animals: " + animals.size());

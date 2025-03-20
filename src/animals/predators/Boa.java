@@ -1,6 +1,12 @@
+package animals.predators;
+
+import animals.Animal;
+import animals.Predator;
+import config.SimulationParams;
+
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Boa extends Predator{
+public class Boa extends Predator {
     public Boa(int x, int y) {
         super(x, y);
         name = "Boa";
@@ -15,7 +21,7 @@ public class Boa extends Predator{
     }
 
     @Override
-    void move() {
+    public void move() {
         int dx = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         int dy = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         x = Math.max(0, Math.min(SimulationParams.WIDTH - 1, x + dx));
@@ -23,7 +29,7 @@ public class Boa extends Predator{
     }
 
     @Override
-    Animal reproduce() {
+    public Animal reproduce() {
         return new Boa(x, y);
     }
 }

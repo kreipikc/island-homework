@@ -1,4 +1,10 @@
-import java.util.Iterator;
+package animals.herbivores;
+
+import animals.Animal;
+import animals.Herbivore;
+import config.SimulationParams;
+import plants.Plant;
+
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -13,12 +19,12 @@ public class Duck extends Herbivore {
     }
 
     @Override
-    void eat(List<Animal> animals, List<Plant> plants) {
+    public void eat(List<Animal> animals, List<Plant> plants) {
         synchronized (animals) {
             for (Animal prey : animals) {
-                if (prey != this && prey.isAlive() && prey.x == this.x && prey.y == this.y && prey.name.equals("Caterpillar")) {
+                if (prey != this && prey.isAlive() && prey.getX() == this.x && prey.getY() == this.y && prey.getName().equals("Caterpillar")) {
                     if (ThreadLocalRandom.current().nextInt(100) < 90) {  // 90% шанс съесть гусеницу
-                        prey.isAlive = false;
+                        prey.SetIsAlive(false);
                         hunger = 0.0;
                         return;
                     }
@@ -29,7 +35,7 @@ public class Duck extends Herbivore {
     }
 
     @Override
-    void move() {
+    public void move() {
         int dx = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         int dy = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         x = Math.max(0, Math.min(SimulationParams.WIDTH - 1, x + dx));
@@ -37,7 +43,7 @@ public class Duck extends Herbivore {
     }
 
     @Override
-    Animal reproduce() {
+    public Animal reproduce() {
         return new Duck(x, y);
     }
 }

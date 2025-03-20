@@ -1,3 +1,7 @@
+package animals;
+
+import plants.Plant;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -7,7 +11,7 @@ public abstract class Herbivore extends Animal {
     }
 
     @Override
-    void eat(List<Animal> animals, List<Plant> plants) {
+    public void eat(List<Animal> animals, List<Plant> plants) {
         synchronized (plants) {
             Iterator<Plant> iterator = plants.iterator();
             while (iterator.hasNext()) {

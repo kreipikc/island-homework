@@ -1,3 +1,11 @@
+package animals.predators;
+
+import animals.Animal;
+import animals.Predator;
+import config.SimulationParams;
+import plants.Plant;
+
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Eagle extends Predator {
@@ -15,7 +23,12 @@ public class Eagle extends Predator {
     }
 
     @Override
-    void move() {
+    public void eat(List<Animal> animals, List<Plant> plants) {
+        super.eat(animals, plants); // Используем реализацию из Predator
+    }
+
+    @Override
+    public void move() {
         int dx = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         int dy = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         x = Math.max(0, Math.min(SimulationParams.WIDTH - 1, x + dx));
@@ -23,7 +36,7 @@ public class Eagle extends Predator {
     }
 
     @Override
-    Animal reproduce() {
+    public Animal reproduce() {
         return new Eagle(x, y);
     }
 }

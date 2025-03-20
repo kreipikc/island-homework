@@ -1,3 +1,9 @@
+package animals.predators;
+
+import animals.Animal;
+import animals.Predator;
+import config.SimulationParams;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Bear extends Predator {
@@ -21,7 +27,7 @@ public class Bear extends Predator {
     }
 
     @Override
-    void move() {
+    public void move() {
         int dx = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         int dy = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         x = Math.max(0, Math.min(SimulationParams.WIDTH - 1, x + dx));
@@ -29,7 +35,7 @@ public class Bear extends Predator {
     }
 
     @Override
-    Animal reproduce() {
+    public Animal reproduce() {
         return new Bear(x, y);
     }
 }

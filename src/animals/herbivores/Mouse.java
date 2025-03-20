@@ -1,19 +1,26 @@
+package animals.herbivores;
+
+import animals.Animal;
+import animals.Herbivore;
+import config.SimulationParams;
+import plants.Plant;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Buffalo extends Herbivore {
-    public Buffalo(int x, int y) {
+public class Mouse extends Herbivore {
+    public Mouse(int x, int y) {
         super(x, y);
-        name = "Buffalo";
-        weight = 700.0;
-        maxPerCell = 10;
-        maxSpeed = 3;
-        foodNeeded = 100.0;
+        name = "Mouse";
+        weight = 0.05;
+        maxPerCell = 500;
+        maxSpeed = 1;
+        foodNeeded = 0.01;
     }
 
     @Override
-    void eat(List<Animal> animals, List<Plant> plants) {
+    public void eat(List<Animal> animals, List<Plant> plants) {
         synchronized (plants) {
             Iterator<Plant> iterator = plants.iterator();
             while (iterator.hasNext()) {
@@ -29,7 +36,7 @@ public class Buffalo extends Herbivore {
     }
 
     @Override
-    void move() {
+    public void move() {
         int dx = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         int dy = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         x = Math.max(0, Math.min(SimulationParams.WIDTH - 1, x + dx));
@@ -37,7 +44,7 @@ public class Buffalo extends Herbivore {
     }
 
     @Override
-    Animal reproduce() {
-        return new Buffalo(x, y);
+    public Animal reproduce() {
+        return new Mouse(x, y);
     }
 }

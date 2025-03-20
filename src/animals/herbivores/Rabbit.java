@@ -1,3 +1,9 @@
+package animals.herbivores;
+
+import animals.Animal;
+import animals.Herbivore;
+import config.SimulationParams;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Rabbit extends Herbivore {
@@ -11,7 +17,7 @@ public class Rabbit extends Herbivore {
     }
 
     @Override
-    void move() {
+    public void move() {
         int dx = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         int dy = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         x = Math.max(0, Math.min(SimulationParams.WIDTH - 1, x + dx));
@@ -19,7 +25,7 @@ public class Rabbit extends Herbivore {
     }
 
     @Override
-    Animal reproduce() {
+    public Animal reproduce() {
         return new Rabbit(x, y);
     }
 }

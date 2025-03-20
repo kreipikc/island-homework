@@ -1,3 +1,5 @@
+package plants;
+
 public class Plant {
     private int x, y;
     private double weight = 1.0;
