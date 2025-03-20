@@ -2,14 +2,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Caterpillar extends Herbivore {
-    public Caterpillar(int x, int y) {
+public class Buffalo extends Herbivore {
+    public Buffalo(int x, int y) {
         super(x, y);
-        name = "Caterpillar";
-        weight = 0.01;
-        maxPerCell = 1000;
-        maxSpeed = 1;
-        foodNeeded = 0.001;
+        name = "Buffalo";
+        weight = 700.0;
+        maxPerCell = 10;
+        maxSpeed = 3;
+        foodNeeded = 100.0;
     }
 
     @Override
@@ -30,14 +30,14 @@ public class Caterpillar extends Herbivore {
 
     @Override
     void move() {
-        int dx = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);  // -1, 0 или 1
-        int dy = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);  // -1, 0 или 1
+        int dx = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
+        int dy = ThreadLocalRandom.current().nextInt(-maxSpeed, maxSpeed + 1);
         x = Math.max(0, Math.min(SimulationParams.WIDTH - 1, x + dx));
         y = Math.max(0, Math.min(SimulationParams.HEIGHT - 1, y + dy));
     }
 
     @Override
     Animal reproduce() {
-        return new Caterpillar(x, y);
+        return new Buffalo(x, y);
     }
 }
